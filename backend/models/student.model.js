@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+// mongoose model for Student
 const StudentSchema = new mongoose.Schema({
 	name: {
 		type: String,

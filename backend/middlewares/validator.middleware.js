@@ -1,3 +1,4 @@
+// validator middleware to validate student info while creating
 function Validator(schema) {
 	return function(req, res, next) {
 		const validationResult = schema.validate(req.body)

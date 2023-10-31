@@ -10,11 +10,14 @@ import { StudentService } from './services/student.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
+
+// Component class
 export class AppComponent {
   title = 'frontend';
   students: Student[] = [];
   id = '';
 
+  // studentForm using FormGroup
   studentForm = new FormGroup({
     name: new FormControl('', Validators.required),
     phone: new FormControl('', [
@@ -23,13 +26,16 @@ export class AppComponent {
     ]),
   });
 
+  // Constructor of the class
   constructor(
     private router: Router,
     private studentService: StudentService,
     private toast: NgToastService
   ) {}
 
+  // life cycle hook
   ngOnInit() {
+    // load all the students info on the frontend using getStudentsInfo method from the service class
     this.studentService.getStudentsInfo().subscribe({
       next: (students: Student[]) => {
         this.students = students;
@@ -37,6 +43,7 @@ export class AppComponent {
     });
   }
 
+  // onSubmit method to push the form data to db using createStudentsInfo method from the service class
   onSubmit() {
     if (!this.studentForm.valid) {
       this.toast.error({
@@ -60,6 +67,7 @@ export class AppComponent {
     this.studentForm.reset();
   }
 
+  // delete a student info using deleteStudentsInfo method from the service class
   deleteStudent = (id: string) => {
     this.studentService.deleteStudentInfo(id).subscribe({
       next: () => {
