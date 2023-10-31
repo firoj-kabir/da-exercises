@@ -1,14 +1,19 @@
 const express = require('express')
 
-const { createStudentInfo, getAllStudents } = require('../controllers/student.controller')
+const { createStudentInfo, getAllStudentsInfo, deleteStudentInfo } = require('../controllers/student.controller')
 const { Validator } = require('../middlewares/validator.middleware')
 const { studentSchema } = require('../schemas/student.schema')
 
 const router = express.Router()
 
+// post route - to create student info
 router.post('/', Validator(studentSchema), createStudentInfo)
 
-router.get('/', getAllStudents)
+// get route - to get students info
+router.get('/', getAllStudentsInfo)
+
+// delete route - to delete student info
+router.delete('/:id', deleteStudentInfo)
 
 module.exports = {
 	studentRouter: router
